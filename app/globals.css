@@ -128,3 +128,36 @@
     @apply font-sans;
   }
 }
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  filter: blur(4px);
+  transition: opacity 0.6s ease, transform 0.6s ease, filter 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* Kanban column scrollbar */
+.kanban-col {
+  scrollbar-width: thin;
+  scrollbar-color: #e5e7eb transparent;
+}
+
+/* Live dot pulse */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.live-dot {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+/* Serif font for pitch page */
+.font-serif {
+  font-family: Georgia, 'Times New Roman', serif;
+}
