@@ -1,4 +1,4 @@
-export type DealStage = 'new' | 'pitched' | 'replied' | 'meeting' | 'closed' | 'dead'
+export type DealStage = 'new' | 'pitched' | 'replied' | 'meeting' | 'closed' | 'hold' | 'dead'
 
 export interface AuditFinding {
   category: string
@@ -55,7 +55,8 @@ export const STAGE_CONFIG: Record<DealStage, { label: string; color: string; bg:
   replied: { label: 'Replied', color: '#d97706', bg: '#fffbeb' },
   meeting: { label: 'Meeting', color: '#7c3aed', bg: '#f5f3ff' },
   closed:  { label: 'Closed',  color: '#16a34a', bg: '#f0fdf4' },
+  hold:    { label: 'Hold',    color: '#9ca3af', bg: '#f9fafb' },
   dead:    { label: 'Dead',    color: '#dc2626', bg: '#fef2f2' },
 }
 
-export const STAGE_ORDER: DealStage[] = ['new', 'pitched', 'replied', 'meeting', 'closed', 'dead']
+export const STAGE_ORDER: DealStage[] = ['new', 'pitched', 'replied', 'meeting', 'closed', 'hold', 'dead']

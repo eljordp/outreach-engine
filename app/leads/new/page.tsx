@@ -44,7 +44,7 @@ export default function NewLead() {
   async function save() {
     if (!form.business_name.trim()) return
     setSaving(true)
-    const { data } = await supabase.from('leads').insert({
+    const { data } = await supabase.from('outreach_leads').insert({
       ...form,
       audit_findings: findings.filter(f => f.issue.trim()),
       stage: 'new',

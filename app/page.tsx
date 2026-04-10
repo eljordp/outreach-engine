@@ -5,16 +5,19 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import type { Lead, DealStage, PitchView } from '@/lib/types'
 import { STAGE_CONFIG, STAGE_ORDER } from '@/lib/types'
-import { ExternalLink, Eye, Phone, Globe, Plus, RefreshCw, Zap } from 'lucide-react'
+import { Eye, Phone, Globe, Plus, RefreshCw, Zap } from 'lucide-react'
+
+type AuditFilter = 'all' | 'audited' | 'no-audit'
 
 export default function Dashboard() {
   const [leads, setLeads] = useState<Lead[]>([])
   const [recentViews, setRecentViews] = useState<(PitchView & { lead?: Lead })[]>([])
   const [loading, setLoading] = useState(true)
   const [refreshing, setRefreshing] = useState(false)
+  const [auditFilter, setAuditFilter] = useState<AuditFilter>('all')
 
   async function fetchLeads() {
-    const { data } = await supabase.from('leads').select('*').order('updated_at', { ascending: false })
+    const { data } = await supabase.from('outreach_leads').select('*').order('updated_at', { ascending: false })
     if (data) setLeads(data as Lead[])
   }
 
@@ -49,11 +52,16 @@ export default function Dashboard() {
   }, [])
 
   async function updateStage(leadId: string, stage: DealStage) {
-    await supabase.from('leads').update({ stage }).eq('id', leadId)
+    await supabase.from('outreach_leads').update({ stage }).eq('id', leadId)
     setLeads(prev => prev.map(l => l.id === leadId ? { ...l, stage } : l))
   }
 
-  const byStage = (stage: DealStage) => leads.filter(l => l.stage === stage)
+  const filterByAudit = (l: Lead) => {
+    if (auditFilter === 'audited') return l.audit_findings && l.audit_findings.length >= 3
+    if (auditFilter === 'no-audit') return !l.audit_findings || l.audit_findings.length === 0
+    return true
+  }
+  const byStage = (stage: DealStage) => leads.filter(l => l.stage === stage && filterByAudit(l))
 
   const totalLeads = leads.length
   const pitched = leads.filter(l => ['pitched', 'replied', 'meeting', 'closed'].includes(l.stage)).length
@@ -111,6 +119,17 @@ export default function Dashboard() {
       <div className="flex flex-1 overflow-hidden">
         {/* Kanban */}
         <div className="flex-1 overflow-x-auto p-4">
+          <div className="flex items-center gap-2 mb-3">
+            {(['all', 'audited', 'no-audit'] as AuditFilter[]).map(f => (
+              <button
+                key={f}
+                onClick={() => setAuditFilter(f)}
+                className={`text-[11px] px-2.5 py-1 rounded-md font-medium transition-colors ${auditFilter === f ? 'bg-[#141414] text-white' : 'bg-white border border-[#e5e7eb] text-[#6b7280] hover:border-[#141414]/30'}`}
+              >
+                {f === 'all' ? 'All' : f === 'audited' ? 'Audit ✓' : 'No Audit'}
+              </button>
+            ))}
+          </div>
           <div className="flex gap-3 h-full min-w-max">
             {STAGE_ORDER.filter(s => s !== 'dead').map(stage => {
               const cfg = STAGE_CONFIG[stage]
@@ -196,22 +215,29 @@ export default function Dashboard() {
   )
 }
 
+function AuditBadge({ findings }: { findings: any[] }) {
+  if (!findings || findings.length === 0) {
+    return <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#f3f4f6] text-[#9ca3af] font-medium">No audit</span>
+  }
+  if (findings.length >= 3) {
+    return <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#f0fdf4] text-[#16a34a] font-medium">Audit ✓</span>
+  }
+  return <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#fffbeb] text-[#d97706] font-medium">Partial</span>
+}
+
 function LeadCard({ lead, onStageChange }: { lead: Lead; onStageChange: (id: string, stage: DealStage) => void }) {
   const cfg = STAGE_CONFIG[lead.stage]
+  const hasEmail = !!lead.email
   return (
     <div className="bg-white border border-[#e5e7eb] rounded-xl p-3 hover:border-[#141414]/20 transition-colors group">
       <div className="flex items-start justify-between gap-2 mb-2">
         <Link href={`/leads/${lead.id}`} className="text-sm font-medium leading-tight hover:underline flex-1 min-w-0">
           {lead.business_name}
         </Link>
-        <Link
-          href={`/pitch/${lead.pitch_token}`}
-          target="_blank"
-          className="text-[#6b7280] hover:text-[#141414] opacity-0 group-hover:opacity-100 transition-opacity shrink-0"
-          title="Open pitch page"
-        >
-          <ExternalLink size={12} />
-        </Link>
+        <div className="flex items-center gap-1 shrink-0">
+          {!hasEmail && <span className="text-[9px] px-1.5 py-0.5 rounded bg-[#fef2f2] text-[#dc2626] font-medium">No email</span>}
+          <AuditBadge findings={lead.audit_findings} />
+        </div>
       </div>
 
       <div className="flex flex-col gap-1 mb-3">

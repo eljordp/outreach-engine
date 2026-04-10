@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 import type { Lead, DealStage, PitchView } from '@/lib/types'
 import { STAGE_CONFIG, STAGE_ORDER } from '@/lib/types'
-import { ArrowLeft, Copy, ExternalLink, Eye, Phone, Mail, Globe, Check } from 'lucide-react'
+import { ArrowLeft, Copy, ExternalLink, Eye, Phone, Mail, Globe, Check, Send } from 'lucide-react'
 
 export default function LeadPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)
@@ -16,11 +16,14 @@ export default function LeadPage({ params }: { params: Promise<{ id: string }> }
   const [editing, setEditing] = useState(false)
   const [copied, setCopied] = useState(false)
   const [saving, setSaving] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [sent, setSent] = useState(false)
+  const [sendError, setSendError] = useState('')
   const [notes, setNotes] = useState('')
   const [script, setScript] = useState('')
 
   useEffect(() => {
-    supabase.from('leads').select('*').eq('id', id).single().then(({ data }) => {
+    supabase.from('outreach_leads').select('*').eq('id', id).single().then(({ data }) => {
       if (data) {
         setLead(data as Lead)
         setNotes(data.notes ?? '')
@@ -34,13 +37,13 @@ export default function LeadPage({ params }: { params: Promise<{ id: string }> }
 
   async function updateStage(stage: DealStage) {
     if (!lead) return
-    await supabase.from('leads').update({ stage }).eq('id', id)
+    await supabase.from('outreach_leads').update({ stage }).eq('id', id)
     setLead(prev => prev ? { ...prev, stage } : prev)
   }
 
   async function saveEdits() {
     setSaving(true)
-    await supabase.from('leads').update({ notes, pitch_script: script }).eq('id', id)
+    await supabase.from('outreach_leads').update({ notes, pitch_script: script }).eq('id', id)
     setLead(prev => prev ? { ...prev, notes, pitch_script: script } : prev)
     setEditing(false)
     setSaving(false)
@@ -52,6 +55,26 @@ export default function LeadPage({ params }: { params: Promise<{ id: string }> }
     await navigator.clipboard.writeText(url)
     setCopied(true)
     setTimeout(() => setCopied(false), 2000)
+  }
+
+  async function sendPitch() {
+    if (!lead) return
+    setSending(true)
+    setSendError('')
+    const res = await fetch('/api/send-pitch', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lead_id: lead.id }),
+    })
+    const json = await res.json()
+    if (!res.ok) {
+      setSendError(json.error ?? 'Failed to send')
+    } else {
+      setSent(true)
+      setLead(prev => prev ? { ...prev, stage: 'pitched' } : prev)
+      setTimeout(() => setSent(false), 3000)
+    }
+    setSending(false)
   }
 
   if (!lead) {
@@ -77,21 +100,31 @@ export default function LeadPage({ params }: { params: Promise<{ id: string }> }
           </span>
         </div>
         <div className="flex items-center gap-2">
+          {sendError && <span className="text-xs text-red-500">{sendError}</span>}
           <button
             onClick={copyPitchLink}
             className="flex items-center gap-1.5 text-xs border border-[#e5e7eb] bg-white px-3 py-1.5 rounded-lg hover:border-[#141414]/30 transition-colors"
           >
             {copied ? <Check size={12} className="text-[#16a34a]" /> : <Copy size={12} />}
-            {copied ? 'Copied!' : 'Copy Pitch Link'}
+            {copied ? 'Copied!' : 'Copy Link'}
           </button>
           <Link
-            href={pitchUrl}
+            href={`${pitchUrl}?preview=1`}
             target="_blank"
-            className="flex items-center gap-1.5 text-xs bg-[#141414] text-white px-3 py-1.5 rounded-lg hover:bg-[#333] transition-colors"
+            className="flex items-center gap-1.5 text-xs border border-[#e5e7eb] bg-white px-3 py-1.5 rounded-lg hover:border-[#141414]/30 transition-colors"
           >
             <ExternalLink size={12} />
-            Open Pitch
+            Preview
           </Link>
+          <button
+            onClick={sendPitch}
+            disabled={sending || sent || !lead?.email}
+            title={!lead?.email ? 'Add an email to this lead first' : ''}
+            className="flex items-center gap-1.5 text-xs bg-[#141414] text-white px-3 py-1.5 rounded-lg hover:bg-[#333] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {sent ? <Check size={12} className="text-[#4ade80]" /> : <Send size={12} />}
+            {sending ? 'Sending...' : sent ? 'Sent!' : 'Send Pitch'}
+          </button>
         </div>
       </header>
 
@@ -157,11 +190,17 @@ export default function LeadPage({ params }: { params: Promise<{ id: string }> }
           <div className="bg-white border border-[#e5e7eb] rounded-xl p-5">
             <h3 className="text-xs font-semibold uppercase tracking-widest text-[#6b7280] mb-4">Audit Findings</h3>
             <div className="space-y-3">
-              {lead.audit_findings.map((f, i) => (
+              {lead.audit_findings.map((f: any, i) => (
                 <div key={i} className="border-l-2 border-[#e5e7eb] pl-3">
-                  {f.category && <div className="text-[10px] uppercase tracking-wide text-[#9ca3af] mb-0.5">{f.category}</div>}
-                  <div className="text-sm font-medium">{f.issue}</div>
-                  {f.impact && <div className="text-xs text-[#6b7280] mt-0.5">{f.impact}</div>}
+                  {typeof f === 'string' ? (
+                    <div className="text-sm text-[#374151]">{f}</div>
+                  ) : (
+                    <>
+                      {f.category && <div className="text-[10px] uppercase tracking-wide text-[#9ca3af] mb-0.5">{f.category}</div>}
+                      <div className="text-sm font-medium">{f.issue}</div>
+                      {f.impact && <div className="text-xs text-[#6b7280] mt-0.5">{f.impact}</div>}
+                    </>
+                  )}
                 </div>
               ))}
             </div>

@@ -1,14 +1,30 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import type { Lead } from '@/lib/types'
 
 export default function PitchClient({ lead }: { lead: Lead }) {
   const startTime = useRef(Date.now())
   const maxScroll = useRef(0)
   const tracked = useRef(false)
+  const [name, setName] = useState('')
+  const [message, setMessage] = useState('')
+  const [sending, setSending] = useState(false)
+  const [sent, setSent] = useState(false)
 
   useEffect(() => {
+    const isPreview = new URLSearchParams(window.location.search).has('preview')
+
+    // Scroll reveal (always runs)
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
+    }, { threshold: 0.1 })
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+
+    if (isPreview) {
+      return () => observer.disconnect()
+    }
+
     // Track scroll depth
     function onScroll() {
       const scrolled = window.scrollY + window.innerHeight
@@ -31,14 +47,7 @@ export default function PitchClient({ lead }: { lead: Lead }) {
     }
 
     window.addEventListener('beforeunload', sendTracking)
-    // Also fire after 30s of reading (catches people who don't close)
     const timer = setTimeout(sendTracking, 30000)
-
-    // Scroll reveal
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') })
-    }, { threshold: 0.1 })
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el))
 
     return () => {
       window.removeEventListener('scroll', onScroll)
@@ -49,6 +58,18 @@ export default function PitchClient({ lead }: { lead: Lead }) {
   }, [lead.id])
 
   const findings = lead.audit_findings ?? []
+
+  async function sendReply() {
+    if (!message.trim()) return
+    setSending(true)
+    await fetch('/api/pitch-reply', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ lead_id: lead.id, name, message }),
+    })
+    setSending(false)
+    setSent(true)
+  }
 
   return (
     <div className="min-h-screen bg-[#fafafa] relative">
@@ -78,16 +99,22 @@ export default function PitchClient({ lead }: { lead: Lead }) {
           <div className="reveal mb-16">
             <p className="text-xs uppercase tracking-widest text-[#9ca3af] mb-8">The Audit</p>
             <div className="space-y-8">
-              {findings.map((f, i) => (
+              {findings.map((f: any, i) => (
                 <div key={i} className="reveal">
                   <div className="flex items-start gap-4">
                     <div className="w-8 h-8 rounded-full bg-[#141414] text-white flex items-center justify-center text-xs font-semibold shrink-0 mt-0.5">
                       {i + 1}
                     </div>
                     <div>
-                      {f.category && <p className="text-[10px] uppercase tracking-widest text-[#9ca3af] mb-1">{f.category}</p>}
-                      <h3 className="font-semibold text-[#141414] mb-1">{f.issue}</h3>
-                      {f.impact && <p className="text-sm text-[#6b7280] leading-relaxed">{f.impact}</p>}
+                      {typeof f === 'string' ? (
+                        <p className="text-[#141414] leading-relaxed">{f}</p>
+                      ) : (
+                        <>
+                          {f.category && <p className="text-[10px] uppercase tracking-widest text-[#9ca3af] mb-1">{f.category}</p>}
+                          <h3 className="font-semibold text-[#141414] mb-1">{f.issue}</h3>
+                          {f.impact && <p className="text-sm text-[#6b7280] leading-relaxed">{f.impact}</p>}
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -136,18 +163,54 @@ export default function PitchClient({ lead }: { lead: Lead }) {
           </div>
         </div>
 
-        {/* CTA */}
-        <div className="reveal text-center">
+        {/* CTA / Reply Form */}
+        <div className="reveal">
           <p className="text-xs uppercase tracking-widest text-[#9ca3af] mb-4">Next Step</p>
-          <h2 className="font-serif text-2xl text-[#141414] mb-4">15 minutes. No commitment.</h2>
-          <p className="text-[#6b7280] text-sm mb-8">I've already mapped out the strategy. Let's walk through it and make sure it's the right fit.</p>
-          <a
-            href="https://cal.com/jdlo"
-            className="inline-flex items-center gap-2 bg-[#141414] text-white px-8 py-4 rounded-full text-sm font-medium hover:bg-[#333] transition-colors"
-          >
-            Book a 15-minute call →
-          </a>
-          <p className="text-[10px] text-[#9ca3af] mt-4">Built by JDLO · jdlo.site</p>
+          <h2 className="font-serif text-2xl text-[#141414] mb-3">Got a question? Send it.</h2>
+          <p className="text-[#6b7280] text-sm mb-8">No commitment. Just reply and I'll get back to you same day.</p>
+
+          {sent ? (
+            <div className="bg-[#f0fdf4] border border-[#bbf7d0] rounded-xl p-6 text-center">
+              <p className="text-sm font-medium text-[#16a34a]">Message sent — I'll be in touch soon.</p>
+            </div>
+          ) : (
+            <div className="space-y-3">
+              <input
+                type="text"
+                placeholder="Your name"
+                value={name}
+                onChange={e => setName(e.target.value)}
+                className="w-full border border-[#e5e7eb] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#141414] transition-colors"
+              />
+              <textarea
+                placeholder="What's on your mind?"
+                value={message}
+                onChange={e => setMessage(e.target.value)}
+                rows={4}
+                className="w-full border border-[#e5e7eb] rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#141414] transition-colors resize-none"
+              />
+              <button
+                onClick={sendReply}
+                disabled={sending || !message.trim()}
+                className="w-full bg-[#141414] text-white py-3.5 rounded-xl text-sm font-medium hover:bg-[#333] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                {sending ? 'Sending...' : 'Send message →'}
+              </button>
+              <div className="flex items-center gap-3 py-2">
+                <div className="flex-1 h-px bg-[#e5e7eb]" />
+                <span className="text-xs text-[#9ca3af]">or</span>
+                <div className="flex-1 h-px bg-[#e5e7eb]" />
+              </div>
+              <a
+                href="https://cal.com/jdlo"
+                target="_blank"
+                className="w-full flex items-center justify-center border border-[#e5e7eb] text-[#374151] py-3.5 rounded-xl text-sm font-medium hover:border-[#141414] transition-colors"
+              >
+                Pick a time for a call →
+              </a>
+            </div>
+          )}
+          <p className="text-[10px] text-[#9ca3af] mt-6 text-center">Built by JDLO · jdlo.site</p>
         </div>
       </div>
     </div>
