@@ -15,7 +15,19 @@ interface Lead {
   pitch_script: string | null
   audit_findings: Array<{ category: string; issue: string; impact: string }>
   stage: string
+  notes: string | null
 }
+
+const SUBJECT_TEMPLATES = [
+  (b: string) => `Quick thought on ${b}`,
+  (b: string) => `One thing I'd change on ${b}'s site`,
+  (b: string) => `${b} — saw something worth flagging`,
+  (b: string) => `${b}'s site — quick read`,
+  (b: string) => `Was looking at ${b} — found a few things`,
+  (b: string) => `Worth 2 minutes — about ${b}`,
+]
+
+const rand = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)]
 
 export async function POST(req: NextRequest) {
   const auth = req.headers.get('authorization')
@@ -31,14 +43,14 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json().catch(() => ({}))
-  const { industry, leadIds, limit = 10 } = body as { industry?: string; leadIds?: string[]; limit?: number }
+  const { industry, leadIds, limit = 30 } = body as { industry?: string; leadIds?: string[]; limit?: number }
 
-  // Pull target leads
   const params = new URLSearchParams()
-  params.set('select', 'id,business_name,email,pitch_token,pitch_script,audit_findings,stage')
+  params.set('select', 'id,business_name,email,pitch_token,pitch_script,audit_findings,stage,notes')
   params.set('email', 'not.is.null')
   if (industry) params.set('industry', `eq.${industry}`)
   if (leadIds && leadIds.length) params.set('id', `in.(${leadIds.join(',')})`)
+  params.set('order', 'created_at.asc')
 
   const headers = {
     'apikey': SERVICE_KEY,
@@ -46,8 +58,10 @@ export async function POST(req: NextRequest) {
   }
   const leadsRes = await fetch(`${SUPABASE_URL}/rest/v1/outreach_leads?${params.toString()}`, { headers })
   const allLeads: Lead[] = await leadsRes.json()
+  // Skip leads already re-sent via Gmail (notes contains "Sent via Gmail")
   const ready = allLeads
     .filter(l => l.email && l.pitch_script && l.audit_findings && l.audit_findings.length >= 2)
+    .filter(l => !(l.notes || '').includes('Sent via Gmail'))
     .slice(0, limit)
 
   if (!ready.length) {
@@ -78,10 +92,11 @@ export async function POST(req: NextRequest) {
 </div>`
 
     try {
+      const subject = rand(SUBJECT_TEMPLATES)(lead.business_name)
       await transporter.sendMail({
         from: `"${FROM_NAME}" <${FROM_EMAIL}>`,
         to: lead.email!,
-        subject: `Quick thought on ${lead.business_name}`,
+        subject,
         text,
         html,
       })
