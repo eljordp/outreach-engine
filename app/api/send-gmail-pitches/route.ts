@@ -48,6 +48,7 @@ export async function POST(req: NextRequest) {
   const params = new URLSearchParams()
   params.set('select', 'id,business_name,email,pitch_token,pitch_script,audit_findings,stage,notes')
   params.set('email', 'not.is.null')
+  params.set('stage', 'neq.dead')
   if (industry) params.set('industry', `eq.${industry}`)
   if (leadIds && leadIds.length) params.set('id', `in.(${leadIds.join(',')})`)
   params.set('order', 'created_at.asc')
@@ -103,11 +104,13 @@ export async function POST(req: NextRequest) {
         html,
       })
 
-      // Update stage + note
+      // Append "Sent via Gmail" to notes (don't overwrite)
+      const newNote = `Sent via Gmail ${new Date().toISOString()}`
+      const combinedNotes = lead.notes ? `${lead.notes}\n${newNote}` : newNote
       await fetch(`${SUPABASE_URL}/rest/v1/outreach_leads?id=eq.${lead.id}`, {
         method: 'PATCH',
         headers: { ...headers, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-        body: JSON.stringify({ stage: 'pitched', notes: `Sent via Gmail ${new Date().toISOString()}` }),
+        body: JSON.stringify({ stage: 'pitched', notes: combinedNotes }),
       })
 
       results.push({ lead: lead.business_name, ok: true })
