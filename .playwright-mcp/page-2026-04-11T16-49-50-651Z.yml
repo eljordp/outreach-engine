@@ -1,0 +1,600 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "FWWHEELS" [ref=e4] [cursor=pointer]:
+        - /url: "#"
+      - list [ref=e5]:
+        - listitem [ref=e6]:
+          - link "Home" [ref=e7] [cursor=pointer]:
+            - /url: "#home"
+        - listitem [ref=e8]:
+          - generic [ref=e9]:
+            - link "Brands" [ref=e10] [cursor=pointer]:
+              - /url: "#brands"
+            - button "Open brand menu" [ref=e11] [cursor=pointer]:
+              - img [ref=e12]
+        - listitem [ref=e14]:
+          - link "Gallery" [ref=e15] [cursor=pointer]:
+            - /url: "#gallery"
+        - listitem [ref=e16]:
+          - link "About" [ref=e17] [cursor=pointer]:
+            - /url: "#about"
+        - listitem [ref=e18]:
+          - link "Contact" [ref=e19] [cursor=pointer]:
+            - /url: "#contact"
+      - link [ref=e20] [cursor=pointer]:
+        - /url: https://www.instagram.com/fw.wheels/
+        - img [ref=e21]
+  - generic [ref=e25]:
+    - paragraph [ref=e26]: Certified Friendly Neighborhood
+    - heading "WHEEL & TIRE" [level=1] [ref=e27]
+    - paragraph [ref=e28]: Premium aftermarket wheels. From refined street setups to full forged builds — We Got It All.
+    - generic [ref=e29]:
+      - link "Shop Brands" [ref=e30] [cursor=pointer]:
+        - /url: "#brands"
+      - link "Browse Collection" [ref=e31] [cursor=pointer]:
+        - /url: "#brands"
+  - generic [ref=e33]:
+    - heading "Our Brands" [level=2] [ref=e34]
+    - paragraph [ref=e35]: Three trusted manufacturers. Every style covered.
+    - generic [ref=e36]:
+      - button "All Brands" [ref=e37] [cursor=pointer]
+      - button "Aodhan" [ref=e38] [cursor=pointer]
+      - button "Mflow Racing" [ref=e39] [cursor=pointer]
+      - button "Vors" [ref=e40] [cursor=pointer]
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - heading "AODHAN" [level=3] [ref=e44]
+        - generic [ref=e45]: $616 – $1,376 per set
+      - generic [ref=e46]:
+        - heading "AH Series — Classic Multi-Spoke" [level=4] [ref=e47]
+        - generic [ref=e48]:
+          - generic [ref=e49] [cursor=pointer]:
+            - img "Aodhan AH01" [ref=e51]
+            - generic [ref=e52]:
+              - paragraph [ref=e53]: AH01
+              - paragraph [ref=e54]: From $162
+              - generic "Silver Machined Face" [ref=e56]
+          - generic [ref=e57] [cursor=pointer]:
+            - img "Aodhan AH02" [ref=e59]
+            - generic [ref=e60]:
+              - paragraph [ref=e61]: AH02
+              - paragraph [ref=e62]: From $237
+              - generic [ref=e63]:
+                - generic "Gloss Black" [ref=e64]
+                - generic "Hyper Black w/ Machined Lip" [ref=e65]
+                - generic "Silver w/ Machined Lip" [ref=e66]
+          - generic [ref=e67] [cursor=pointer]:
+            - img "Aodhan AH03" [ref=e69]
+            - generic [ref=e70]:
+              - paragraph [ref=e71]: AH03
+              - paragraph [ref=e72]: From $162
+              - generic [ref=e73]:
+                - generic "Gloss Black" [ref=e74]
+                - generic "Silver Machined Face" [ref=e75]
+          - generic [ref=e76] [cursor=pointer]:
+            - img "Aodhan AH04" [ref=e78]
+            - generic [ref=e79]:
+              - paragraph [ref=e80]: AH04
+              - paragraph [ref=e81]: From $162
+              - generic "Silver Machined Face" [ref=e83]
+          - generic [ref=e84] [cursor=pointer]:
+            - img "Aodhan AH05" [ref=e86]
+            - generic [ref=e87]:
+              - paragraph [ref=e88]: AH05
+              - paragraph [ref=e89]: From $162
+              - generic [ref=e90]:
+                - generic "Gloss Black" [ref=e91]
+                - generic "Silver Machined Face" [ref=e92]
+          - generic [ref=e93] [cursor=pointer]:
+            - img "Aodhan AH06" [ref=e95]
+            - generic [ref=e96]:
+              - paragraph [ref=e97]: AH06
+              - paragraph [ref=e98]: From $224
+              - generic [ref=e99]:
+                - generic "Machined Silver" [ref=e100]
+                - generic "Matte Black" [ref=e101]
+                - generic "Matte Gray" [ref=e102]
+                - generic "Textured Bronze" [ref=e103]
+          - generic [ref=e104] [cursor=pointer]:
+            - img "Aodhan AH07" [ref=e106]
+            - generic [ref=e107]:
+              - paragraph [ref=e108]: AH07
+              - paragraph [ref=e109]: From $249
+              - generic [ref=e110]:
+                - generic "Gloss Black" [ref=e111]
+                - generic "Gloss White" [ref=e112]
+                - generic "Hyper Black" [ref=e113]
+                - generic "Textured Bronze" [ref=e114]
+          - generic [ref=e115] [cursor=pointer]:
+            - img "Aodhan AH08" [ref=e117]
+            - generic [ref=e118]:
+              - paragraph [ref=e119]: AH08
+              - paragraph [ref=e120]: From $249
+              - generic [ref=e121]:
+                - generic "Gloss Black" [ref=e122]
+                - generic "Gloss White" [ref=e123]
+                - generic "Hyper Black" [ref=e124]
+                - generic "Textured Bronze" [ref=e125]
+          - generic [ref=e126] [cursor=pointer]:
+            - img "Aodhan AH09" [ref=e128]
+            - generic [ref=e129]:
+              - paragraph [ref=e130]: AH09
+              - paragraph [ref=e131]: From $249
+              - generic [ref=e132]:
+                - generic "Hyper Black" [ref=e133]
+                - generic "Matte Black" [ref=e134]
+                - generic "Matte Bronze" [ref=e135]
+                - generic "Silver Machined Face" [ref=e136]
+          - generic [ref=e137] [cursor=pointer]:
+            - img "Aodhan AHX" [ref=e139]
+            - generic [ref=e140]:
+              - paragraph [ref=e141]: AHX
+              - paragraph [ref=e142]: From $249
+              - generic [ref=e143]:
+                - generic "Hyper Black" [ref=e144]
+                - generic "Matte Black" [ref=e145]
+                - generic "Matte Bronze" [ref=e146]
+                - generic "Silver Machined Face" [ref=e147]
+          - generic [ref=e148] [cursor=pointer]:
+            - img "Aodhan AH11" [ref=e150]
+            - generic [ref=e151]:
+              - paragraph [ref=e152]: AH11
+              - paragraph [ref=e153]: From $249
+              - generic [ref=e154]:
+                - generic "Hyper Black" [ref=e155]
+                - generic "Matte Black" [ref=e156]
+                - generic "Matte Bronze" [ref=e157]
+                - generic "Silver Machined Face" [ref=e158]
+      - generic [ref=e159]:
+        - heading "DS Series — Deep Concave" [level=4] [ref=e160]
+        - generic [ref=e161]:
+          - generic [ref=e162] [cursor=pointer]:
+            - img "Aodhan DS01" [ref=e164]
+            - generic [ref=e165]:
+              - paragraph [ref=e166]: DS01
+              - paragraph [ref=e167]: From $249
+              - generic [ref=e168]:
+                - generic "Black Vacuum (PVD)" [ref=e169]
+                - generic "Gloss Black" [ref=e170]
+                - generic "Silver w/Machined Lip" [ref=e171]
+                - generic "Vacuum Chrome (PVD)" [ref=e172]
+                - generic [ref=e173]: "+2"
+          - generic [ref=e174] [cursor=pointer]:
+            - img "Aodhan DS02" [ref=e176]
+            - generic [ref=e177]:
+              - paragraph [ref=e178]: DS02
+              - paragraph [ref=e179]: From $249
+              - generic [ref=e180]:
+                - generic "Black Vacuum (PVD)" [ref=e181]
+                - generic "Bronze w/Machined Lip" [ref=e182]
+                - generic "Gold Vacuum (PVD)" [ref=e183]
+                - generic "Hyper Black" [ref=e184]
+                - generic [ref=e185]: "+3"
+          - generic [ref=e186] [cursor=pointer]:
+            - img "Aodhan DS03" [ref=e188]
+            - generic [ref=e189]:
+              - paragraph [ref=e190]: DS03
+              - paragraph [ref=e191]: From $249
+              - generic [ref=e192]:
+                - generic "Black Vacuum" [ref=e193]
+                - generic "Gold Vacuum" [ref=e194]
+                - generic "Silver w/Machined Face" [ref=e195]
+                - generic "Vacuum Chrome" [ref=e196]
+          - generic [ref=e197] [cursor=pointer]:
+            - img "Aodhan DS05" [ref=e199]
+            - generic [ref=e200]:
+              - paragraph [ref=e201]: DS05
+              - paragraph [ref=e202]: From $249
+              - generic [ref=e203]:
+                - generic "Bronze w/Machined Lip" [ref=e204]
+                - generic "Gloss Black" [ref=e205]
+                - generic "Silver w/Machined Face" [ref=e206]
+                - generic "Black Vacuum" [ref=e207]
+          - generic [ref=e208] [cursor=pointer]:
+            - img "Aodhan DS06" [ref=e210]
+            - generic [ref=e211]:
+              - paragraph [ref=e212]: DS06
+              - paragraph [ref=e213]: From $249
+              - generic [ref=e214]:
+                - generic "Bronze w/Machined Lip" [ref=e215]
+                - generic "Gloss Black" [ref=e216]
+                - generic "Silver w/Machined Face" [ref=e217]
+          - generic [ref=e218] [cursor=pointer]:
+            - img "Aodhan DS07" [ref=e220]
+            - generic [ref=e221]:
+              - paragraph [ref=e222]: DS07
+              - paragraph [ref=e223]: From $249
+              - generic [ref=e224]:
+                - generic "Bronze w/Machined Lip" [ref=e225]
+                - generic "Gloss Black" [ref=e226]
+                - generic "Silver w/Machined Face" [ref=e227]
+          - generic [ref=e228] [cursor=pointer]:
+            - img "Aodhan DS08" [ref=e230]
+            - generic [ref=e231]:
+              - paragraph [ref=e232]: DS08
+              - paragraph [ref=e233]: From $274
+              - generic [ref=e234]:
+                - generic "Bronze w/Machined Lip" [ref=e235]
+                - generic "Gloss Black" [ref=e236]
+                - generic "Silver w/Machined Face" [ref=e237]
+          - generic [ref=e238] [cursor=pointer]:
+            - img "Aodhan DS09" [ref=e240]
+            - generic [ref=e241]:
+              - paragraph [ref=e242]: DS09
+              - paragraph [ref=e243]: From $274
+              - generic [ref=e244]:
+                - generic "Bronze w/Machined Lip" [ref=e245]
+                - generic "Candy Red w/ (Chrome Rivets)" [ref=e246]
+                - generic "Gloss Black W /Gold Rivets" [ref=e247]
+                - generic "Silver w/Machined Face" [ref=e248]
+          - generic [ref=e249] [cursor=pointer]:
+            - img "Aodhan DSX" [ref=e251]
+            - generic [ref=e252]:
+              - paragraph [ref=e253]: DSX
+              - paragraph [ref=e254]: From $206
+              - generic [ref=e255]:
+                - generic "Bronze w/Machined Lip" [ref=e256]
+                - generic "Gloss Black W /Gold Rivets" [ref=e257]
+                - generic "Silver w/Machined Face" [ref=e258]
+      - generic [ref=e259]:
+        - heading "AFF Series — Flow Form" [level=4] [ref=e260]
+        - generic [ref=e261]:
+          - generic [ref=e262] [cursor=pointer]:
+            - img "Aodhan AFF1" [ref=e264]
+            - generic [ref=e265]:
+              - paragraph [ref=e266]: AFF1
+              - paragraph [ref=e267]: From $362
+              - generic [ref=e268]:
+                - generic "Matte Black" [ref=e269]
+                - generic "Matte Bronze" [ref=e270]
+                - generic "Silver Machined Face" [ref=e271]
+          - generic [ref=e272] [cursor=pointer]:
+            - img "Aodhan AFF2" [ref=e274]
+            - generic [ref=e275]:
+              - paragraph [ref=e276]: AFF2
+              - paragraph [ref=e277]: From $224
+              - generic [ref=e278]:
+                - generic "Matte Black" [ref=e279]
+                - generic "Matte Bronze" [ref=e280]
+                - generic "Matte Gray" [ref=e281]
+                - generic "Silver Machined Face" [ref=e282]
+          - generic [ref=e283] [cursor=pointer]:
+            - img "Aodhan AFF3" [ref=e285]
+            - generic [ref=e286]:
+              - paragraph [ref=e287]: AFF3
+              - paragraph [ref=e288]: From $362
+              - generic [ref=e289]:
+                - generic "Matte Black" [ref=e290]
+                - generic "Matte Bronze" [ref=e291]
+                - generic "Silver Machined Face" [ref=e292]
+          - generic [ref=e293] [cursor=pointer]:
+            - img "Aodhan AFF7" [ref=e295]
+            - generic [ref=e296]:
+              - paragraph [ref=e297]: AFF7
+              - paragraph [ref=e298]: From $274
+              - generic [ref=e299]:
+                - generic "Matte Black" [ref=e300]
+                - generic "Matte Bronze" [ref=e301]
+                - generic "Silver Machined Face" [ref=e302]
+          - generic [ref=e303] [cursor=pointer]:
+            - img "Aodhan AFF9" [ref=e305]
+            - generic [ref=e306]:
+              - paragraph [ref=e307]: AFF9
+              - paragraph [ref=e308]: From $362
+              - generic [ref=e309]:
+                - generic "Gloss Silver Machined Face" [ref=e310]
+                - generic "Matte Black" [ref=e311]
+                - generic "Matte Bronze" [ref=e312]
+    - generic [ref=e313]:
+      - generic [ref=e314]:
+        - heading "MFLOW RACING" [level=3] [ref=e316]
+        - generic [ref=e317]: $756 – $1,231 per set
+      - generic [ref=e318]:
+        - heading "MFR Series — Flow Form" [level=4] [ref=e319]
+        - generic [ref=e320]:
+          - generic [ref=e321] [cursor=pointer]:
+            - img "Mflow MFR1" [ref=e323]
+            - generic [ref=e324]:
+              - paragraph [ref=e325]: MFR1
+              - paragraph [ref=e326]: From $212
+              - generic [ref=e327]:
+                - generic "Hyper Black" [ref=e328]
+                - generic "Matte Black" [ref=e329]
+                - generic "Matte Bronze" [ref=e330]
+          - generic [ref=e331] [cursor=pointer]:
+            - img "Mflow MFR2" [ref=e333]
+            - generic [ref=e334]:
+              - paragraph [ref=e335]: MFR2
+              - paragraph [ref=e336]: From $212
+              - generic [ref=e337]:
+                - generic "Matte Black" [ref=e338]
+                - generic "Matte Bronze" [ref=e339]
+          - generic [ref=e340] [cursor=pointer]:
+            - img "Mflow MFR3" [ref=e342]
+            - generic [ref=e343]:
+              - paragraph [ref=e344]: MFR3
+              - paragraph [ref=e345]: From $212
+              - generic [ref=e346]:
+                - generic "Gloss Black" [ref=e347]
+                - generic "Hyper Silver" [ref=e348]
+                - generic "Matte Bronze" [ref=e349]
+          - generic [ref=e350] [cursor=pointer]:
+            - img "Mflow MFR4" [ref=e352]
+            - generic [ref=e353]:
+              - paragraph [ref=e354]: MFR4
+              - paragraph [ref=e355]: From $212
+              - generic [ref=e356]:
+                - generic "Matte Black Machine Lip" [ref=e357]
+                - generic "Matte Bronze Machined Lip" [ref=e358]
+      - generic [ref=e359]:
+        - heading "MFL Series — Flow Forming" [level=4] [ref=e360]
+        - generic [ref=e361]:
+          - generic [ref=e362] [cursor=pointer]:
+            - img "Mflow MFL1" [ref=e364]
+            - generic [ref=e365]:
+              - paragraph [ref=e366]: MFL1
+              - paragraph [ref=e367]: From $212
+              - generic [ref=e368]:
+                - generic "Chrome" [ref=e369]
+                - generic "Matte Black Machined Lip" [ref=e370]
+                - generic "Matte Bronze Machined Lip" [ref=e371]
+          - generic [ref=e372] [cursor=pointer]:
+            - img "Mflow MFL2" [ref=e374]
+            - generic [ref=e375]:
+              - paragraph [ref=e376]: MFL2
+              - paragraph [ref=e377]: From $212
+              - generic [ref=e378]:
+                - generic "Chrome" [ref=e379]
+                - generic "Matte Black Machined Lip" [ref=e380]
+                - generic "Matte Bronze Machined Lip" [ref=e381]
+      - generic [ref=e382]:
+        - heading "MF Series — Offroad" [level=4] [ref=e383]
+        - generic [ref=e384]:
+          - generic [ref=e385] [cursor=pointer]:
+            - img "Mflow MF02" [ref=e387]
+            - generic [ref=e388]:
+              - paragraph [ref=e389]: MF02
+              - paragraph [ref=e390]: From $199
+              - generic [ref=e391]:
+                - generic "Matte Black" [ref=e392]
+                - generic "Matte Bronze" [ref=e393]
+          - generic [ref=e394] [cursor=pointer]:
+            - img "Mflow MF03" [ref=e396]
+            - generic [ref=e397]:
+              - paragraph [ref=e398]: MF03
+              - paragraph [ref=e399]: From $199
+              - generic [ref=e400]:
+                - generic "Matte Black" [ref=e401]
+                - generic "Matte Bronze" [ref=e402]
+          - generic [ref=e403] [cursor=pointer]:
+            - img "Mflow MF04" [ref=e405]
+            - generic [ref=e406]:
+              - paragraph [ref=e407]: MF04
+              - paragraph [ref=e408]: From $199
+              - generic [ref=e409]:
+                - generic "Matte Black" [ref=e410]
+                - generic "Matte Bronze" [ref=e411]
+          - generic [ref=e412] [cursor=pointer]:
+            - img "Mflow MF05" [ref=e414]
+            - generic [ref=e415]:
+              - paragraph [ref=e416]: MF05
+              - paragraph [ref=e417]: From $199
+              - generic [ref=e418]:
+                - generic "Matte Black" [ref=e419]
+                - generic "Matte Bronze" [ref=e420]
+          - generic [ref=e421] [cursor=pointer]:
+            - img "Mflow MF06" [ref=e423]
+            - generic [ref=e424]:
+              - paragraph [ref=e425]: MF06
+              - paragraph [ref=e426]: From $199
+              - generic [ref=e427]:
+                - generic "Matte Black" [ref=e428]
+                - generic "Matte Bronze" [ref=e429]
+          - generic [ref=e430] [cursor=pointer]:
+            - img "Mflow MF01" [ref=e432]
+            - generic [ref=e433]:
+              - paragraph [ref=e434]: MF01
+              - paragraph [ref=e435]: From $199
+              - generic [ref=e436]:
+                - generic "Matte Black" [ref=e437]
+                - generic "Matte Bronze" [ref=e438]
+    - generic [ref=e439]:
+      - generic [ref=e440]:
+        - heading "VORS" [level=3] [ref=e442]
+        - generic [ref=e443]: $627 – $1,387 per set
+      - generic [ref=e444]:
+        - heading "TR Series — Track Road" [level=4] [ref=e445]
+        - generic [ref=e446]:
+          - generic [ref=e447] [cursor=pointer]:
+            - img "Vors TR4" [ref=e449]
+            - generic [ref=e450]:
+              - paragraph [ref=e451]: TR4
+              - paragraph [ref=e452]: From $195
+              - generic [ref=e453]:
+                - generic "Black" [ref=e454]
+                - generic "Bronze" [ref=e455]
+                - generic "Hyper Black" [ref=e456]
+                - generic "Silver Machined" [ref=e457]
+                - generic [ref=e458]: "+1"
+          - generic [ref=e459] [cursor=pointer]:
+            - img "Vors TR10" [ref=e461]
+            - generic [ref=e462]:
+              - paragraph [ref=e463]: TR10
+              - paragraph [ref=e464]: From $175
+              - generic [ref=e465]:
+                - generic "Black" [ref=e466]
+                - generic "White" [ref=e467]
+          - generic [ref=e468] [cursor=pointer]:
+            - img "Vors TR14" [ref=e470]
+            - generic [ref=e471]:
+              - paragraph [ref=e472]: TR14
+              - paragraph [ref=e473]: From $195
+              - generic [ref=e474]:
+                - generic "Black" [ref=e475]
+                - generic "Silver" [ref=e476]
+          - generic [ref=e477] [cursor=pointer]:
+            - img "Vors TR37" [ref=e479]
+            - generic [ref=e480]:
+              - paragraph [ref=e481]: TR37
+              - paragraph [ref=e482]: From $165
+              - generic [ref=e483]:
+                - generic "Black" [ref=e484]
+                - generic "Bronze" [ref=e485]
+                - generic "Hyper Black" [ref=e486]
+                - generic "Silver Machined" [ref=e487]
+                - generic [ref=e488]: "+1"
+          - generic [ref=e489] [cursor=pointer]:
+            - img "Vors TR88" [ref=e491]
+            - generic [ref=e492]:
+              - paragraph [ref=e493]: TR88
+              - paragraph [ref=e494]: From $220
+              - generic [ref=e495]:
+                - generic "Black" [ref=e496]
+                - generic "Bronze" [ref=e497]
+                - generic "Silver Machined" [ref=e498]
+      - generic [ref=e499]:
+        - heading "VR Series — Multi-Spoke" [level=4] [ref=e500]
+        - generic [ref=e501]:
+          - generic [ref=e502] [cursor=pointer]:
+            - img "Vors VR8" [ref=e504]
+            - generic [ref=e505]:
+              - paragraph [ref=e506]: VR8
+              - paragraph [ref=e507]: From $220
+              - generic [ref=e508]:
+                - generic "Gloss Black" [ref=e509]
+                - generic "Hyper Black" [ref=e510]
+                - generic "Silver" [ref=e511]
+          - generic [ref=e512] [cursor=pointer]:
+            - img "Vors AR1" [ref=e514]
+            - generic [ref=e515]:
+              - paragraph [ref=e516]: AR1
+              - paragraph [ref=e517]: From $185
+              - generic "Silver Machined" [ref=e519]
+          - generic [ref=e520] [cursor=pointer]:
+            - img "Vors AR5" [ref=e522]
+            - generic [ref=e523]:
+              - paragraph [ref=e524]: AR5
+              - paragraph [ref=e525]: From $210
+              - generic [ref=e526]:
+                - generic "Black" [ref=e527]
+                - generic "Bronze" [ref=e528]
+                - generic "Silver Machined" [ref=e529]
+      - generic [ref=e530]:
+        - heading "SP/LT Series — Sport Entry" [level=4] [ref=e531]
+        - generic [ref=e532]:
+          - generic [ref=e533] [cursor=pointer]:
+            - img "Vors SP1" [ref=e535]
+            - generic [ref=e536]:
+              - paragraph [ref=e537]: SP1
+              - paragraph [ref=e538]: From $165
+              - generic [ref=e539]:
+                - generic "Hyper Black" [ref=e540]
+                - generic "Matte Black" [ref=e541]
+                - generic "Silver Machined" [ref=e542]
+                - generic "White" [ref=e543]
+          - generic [ref=e544] [cursor=pointer]:
+            - img "Vors LT53" [ref=e546]
+            - generic [ref=e547]:
+              - paragraph [ref=e548]: LT53
+              - paragraph [ref=e549]: From $215
+              - generic [ref=e550]:
+                - generic "Black" [ref=e551]
+                - generic "Gun Metal" [ref=e552]
+          - generic [ref=e553] [cursor=pointer]:
+            - img "Vors UO2" [ref=e555]
+            - generic [ref=e556]:
+              - paragraph [ref=e557]: UO2
+              - paragraph [ref=e558]: From $230
+              - generic [ref=e559]:
+                - generic "Black" [ref=e560]
+                - generic "Hyper Silver" [ref=e561]
+  - generic [ref=e563]:
+    - heading "The Builds" [level=2] [ref=e564]
+    - paragraph [ref=e565]:
+      - text: Real fitments. Real customers. Follow
+      - link "@fw.wheels" [ref=e566] [cursor=pointer]:
+        - /url: https://www.instagram.com/fw.wheels/
+      - text: for more.
+    - generic [ref=e567]:
+      - generic [ref=e569] [cursor=pointer]: Gallery Photo 1
+      - generic [ref=e571] [cursor=pointer]: Gallery Photo 2
+      - generic [ref=e573] [cursor=pointer]: Gallery Photo 3
+      - generic [ref=e575] [cursor=pointer]: Gallery Photo 4
+      - generic [ref=e577] [cursor=pointer]: Gallery Photo 5
+      - generic [ref=e579] [cursor=pointer]: Gallery Photo 6
+  - generic [ref=e582]:
+    - generic [ref=e583]:
+      - heading "Why FW Wheels?" [level=2] [ref=e584]
+      - generic [ref=e585]:
+        - generic [ref=e586]:
+          - generic [ref=e587]: "01"
+          - generic [ref=e588]:
+            - heading "Direct Pricing" [level=4] [ref=e589]
+            - paragraph [ref=e590]: We work directly with manufacturers so you get the best price — no middleman markup.
+        - generic [ref=e591]:
+          - generic [ref=e592]: "02"
+          - generic [ref=e593]:
+            - heading "Fitment Expertise" [level=4] [ref=e594]
+            - paragraph [ref=e595]: We know offsets, bolt patterns, and what looks right on your car. No guesswork.
+        - generic [ref=e596]:
+          - generic [ref=e597]: "03"
+          - generic [ref=e598]:
+            - heading "Real Community" [level=4] [ref=e599]
+            - paragraph [ref=e600]: 4,000+ followers trust us. Check the builds on our Instagram — the proof is in the fitment.
+    - generic [ref=e602]: About Photo
+  - generic [ref=e604]:
+    - heading "Contact Us" [level=2] [ref=e605]
+    - paragraph [ref=e606]: Questions? Hit us up on any platform.
+    - generic [ref=e607]:
+      - link "Instagram @fw.wheels" [ref=e608] [cursor=pointer]:
+        - /url: https://www.instagram.com/fw.wheels/
+        - img [ref=e609]
+        - generic [ref=e611]:
+          - strong [ref=e612]: Instagram
+          - generic [ref=e613]: "@fw.wheels"
+      - link "X (Twitter) @fwwheels" [ref=e614] [cursor=pointer]:
+        - /url: https://twitter.com/fwwheels
+        - img [ref=e615]
+        - generic [ref=e617]:
+          - strong [ref=e618]: X (Twitter)
+          - generic [ref=e619]: "@fwwheels"
+      - link "Facebook FW Wheels" [ref=e620] [cursor=pointer]:
+        - /url: https://www.facebook.com/fwwheels
+        - img [ref=e621]
+        - generic [ref=e623]:
+          - strong [ref=e624]: Facebook
+          - generic [ref=e625]: FW Wheels
+      - link "Email contact@fwwheels.com" [ref=e626] [cursor=pointer]:
+        - /url: mailto:contact@fwwheels.com
+        - img [ref=e627]
+        - generic [ref=e630]:
+          - strong [ref=e631]: Email
+          - generic [ref=e632]: contact@fwwheels.com
+  - contentinfo [ref=e633]:
+    - generic [ref=e634]:
+      - generic [ref=e635]:
+        - generic [ref=e636]:
+          - link "FWWHEELS" [ref=e637] [cursor=pointer]:
+            - /url: "#"
+          - paragraph [ref=e638]: Certified Friendly Neighborhood Wheel & Tire
+        - generic [ref=e639]:
+          - link "Brands" [ref=e640] [cursor=pointer]:
+            - /url: "#brands"
+          - link "Gallery" [ref=e641] [cursor=pointer]:
+            - /url: "#gallery"
+          - link "About" [ref=e642] [cursor=pointer]:
+            - /url: "#about"
+          - link "Contact" [ref=e643] [cursor=pointer]:
+            - /url: "#contact"
+          - link "Instagram" [ref=e644] [cursor=pointer]:
+            - /url: https://www.instagram.com/fw.wheels/
+      - paragraph [ref=e646]: © 2026 FW Wheels LLC. All rights reserved.
+  - generic:
+    - generic:
+      - button "×"
+      - generic:
+        - generic:
+          - heading [level=3]
+          - link "Contact Us to Order":
+            - /url: "#contact"

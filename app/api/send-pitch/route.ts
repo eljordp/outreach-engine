@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
   if (error || !lead) return NextResponse.json({ error: 'Lead not found' }, { status: 404 })
   if (!lead.email) return NextResponse.json({ error: 'No email on this lead' }, { status: 400 })
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://outreach-engine-pearl-pi.vercel.app'
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://pitches.jdlo.online'
   const pitchUrl = `${siteUrl}/pitch/${lead.pitch_token}`
 
   // First sentence of pitch script as the email hook
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     : `I put together a quick breakdown for ${lead.business_name}.`
 
   const { error: sendError } = await resend.emails.send({
-    from: 'JP <jp@jdlo.site>',
+    from: 'Jordan <jordan@jdlo.site>',
     to: lead.email,
     subject: `Quick thought on ${lead.business_name}`,
     html: `
@@ -37,8 +37,9 @@ export async function POST(req: NextRequest) {
           See the breakdown →
         </a>
         <p style="margin: 40px 0 0; font-size: 13px; color: #6b7280; font-family: -apple-system, sans-serif;">
-          — JP<br>
-          <a href="https://jdlo.site" style="color: #6b7280;">jdlo.site</a>
+          — Jordan<br>
+          <a href="https://jdlo.site" style="color: #6b7280;">jdlo.site</a><br><br>
+          P.S. You can see examples of my past work at <a href="https://jdlo.site" style="color: #6b7280; text-decoration: underline;">jdlo.site</a>.
         </p>
       </div>
     `,

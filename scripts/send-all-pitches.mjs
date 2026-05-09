@@ -1,7 +1,9 @@
-const SUPABASE_URL = 'https://lgpzuwfixiydaegtbnlb.supabase.co'
-const SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxncHp1d2ZpeGl5ZGFlZ3RibmxiIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NDkwODg2OCwiZXhwIjoyMDkwNDg0ODY4fQ.SN2KenKR1B4v1v93SR4Ioy5cXle49oF4hBROlgiI9s8'
-const RESEND_KEY = 're_T4TMAMJ9_K7GtZW4RxNdchYzVcQoVPbpf'
-const SITE_URL = 'https://outreach-engine-pearl-pi.vercel.app'
+import 'dotenv/config'
+
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://lgpzuwfixiydaegtbnlb.supabase.co'
+const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY
+const RESEND_API_KEY = process.env.RESEND_API_KEY
+const SITE_URL = 'https://pitches.jdlo.site'
 
 const headers = {
   'apikey': SERVICE_KEY,
@@ -9,7 +11,9 @@ const headers = {
   'Content-Type': 'application/json',
 }
 
-// Fetch all new leads with email + audit findings + pitch script
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
+const getRandomDelay = () => Math.floor(Math.random() * (480000 - 180000 + 1) + 180000)
+
 const res = await fetch(
   `${SUPABASE_URL}/rest/v1/outreach_leads?stage=eq.new&email=not.is.null&select=id,business_name,email,pitch_script,pitch_token,audit_findings`,
   { headers }
@@ -32,31 +36,30 @@ for (const lead of ready) {
   const emailRes = await fetch('https://api.resend.com/emails', {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${RESEND_KEY}`,
+      'Authorization': `Bearer ${RESEND_API_KEY}`,
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'JP <jp@jdlo.site>',
-      to: lead.email,
+      from: 'Jordan <jordan@jdlo.site>',
+      to: [lead.email],
       subject: `Quick thought on ${lead.business_name}`,
       html: `
-        <div style="font-family: Georgia, serif; max-width: 520px; margin: 0 auto; padding: 40px 20px; color: #141414; line-height: 1.7;">
-          <p style="margin: 0 0 20px;">${hook}</p>
-          <p style="margin: 0 0 32px;">I put together a quick breakdown specific to your business — figured it was worth sending over.</p>
-          <a href="${pitchUrl}" style="display: inline-block; background: #141414; color: #ffffff; text-decoration: none; padding: 14px 28px; border-radius: 100px; font-family: -apple-system, sans-serif; font-size: 14px; font-weight: 500;">
-            See the breakdown →
-          </a>
-          <p style="margin: 40px 0 0; font-size: 13px; color: #6b7280; font-family: -apple-system, sans-serif;">
-            — JP<br>
-            <a href="https://jdlo.site" style="color: #6b7280;">jdlo.site</a>
-          </p>
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 600px;">
+          <p>${hook}</p>
+          <p>I put together a quick breakdown specific to your business — figured it was worth sending over:</p>
+          <p><a href="${pitchUrl}" style="color: #2563eb; text-decoration: underline;">See the breakdown →</a></p>
+          <p>Best,<br>Jordan<br><span style="color: #6b7280; font-size: 13px;">JDLO · East Bay, CA</span></p>
+          <hr style="border: none; border-top: 1px solid #e5e7eb; margin: 24px 0;">
+          <p style="font-size: 12px; color: #9ca3af; margin: 0;">You're receiving this because your business came up in my research. Not interested? Just reply and I'll never reach out again.</p>
         </div>
       `,
+      text: `${hook}\n\nI put together a quick breakdown specific to your business — figured it was worth sending over:\n\n${pitchUrl}\n\nBest,\nJordan\nJDLO · East Bay, CA\n\n---\nNot interested? Reply and I'll remove you from my list.`,
     }),
   })
 
+  const emailData = await emailRes.json()
+
   if (emailRes.ok) {
-    // Mark as pitched
     await fetch(`${SUPABASE_URL}/rest/v1/outreach_leads?id=eq.${lead.id}`, {
       method: 'PATCH',
       headers: { ...headers, 'Prefer': 'return=minimal' },
@@ -65,13 +68,15 @@ for (const lead of ready) {
     console.log(`✓ ${lead.business_name} → ${lead.email}`)
     success++
   } else {
-    const err = await emailRes.json()
-    console.log(`✗ ${lead.business_name} — ${err.message ?? JSON.stringify(err)}`)
+    console.log(`✗ ${lead.business_name} — ${JSON.stringify(emailData)}`)
     failed++
   }
 
-  // Small delay to avoid rate limits
-  await new Promise(r => setTimeout(r, 200))
+  if (success + failed < ready.length) {
+    const delay = getRandomDelay()
+    console.log(`⏳ Waiting ${Math.round(delay / 60000)} min before next send...`)
+    await sleep(delay)
+  }
 }
 
 console.log(`\nDone: ${success} sent, ${failed} failed`)

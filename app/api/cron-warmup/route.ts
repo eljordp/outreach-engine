@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import nodemailer from 'nodemailer'
 
 const WARMUP_FROM = 'jordan@jdlo.site'
 const WARMUP_TO = 'jordanl4solar@gmail.com'
@@ -46,9 +45,8 @@ export async function GET(req: NextRequest) {
   }
 
   const RESEND_API_KEY = process.env.RESEND_API_KEY
-  const GMAIL_APP_PASSWORD = process.env.GMAIL_APP_PASSWORD
-  if (!RESEND_API_KEY || !GMAIL_APP_PASSWORD) {
-    return NextResponse.json({ error: 'Missing env' }, { status: 500 })
+  if (!RESEND_API_KEY) {
+    return NextResponse.json({ error: 'Missing RESEND_API_KEY' }, { status: 500 })
   }
 
   // Day-based ramp: day 1-7 = 10/day, 8-14 = 20/day, 15+ = 30/day
@@ -56,11 +54,6 @@ export async function GET(req: NextRequest) {
   const today = new Date()
   const daysSinceStart = Math.floor((today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
   const emailsToSend = daysSinceStart < 7 ? 10 : daysSinceStart < 14 ? 20 : 30
-
-  const gmail = nodemailer.createTransport({
-    service: 'gmail',
-    auth: { user: WARMUP_TO, pass: GMAIL_APP_PASSWORD },
-  })
 
   const results: { i: number; ok: boolean; subject: string; err?: string }[] = []
 
@@ -87,28 +80,16 @@ export async function GET(req: NextRequest) {
       if (!res.ok) {
         const errBody = await res.text()
         results.push({ i, ok: false, subject, err: errBody })
-        continue
+      } else {
+        results.push({ i, ok: true, subject })
       }
-
-      // Reply from Gmail back (creates engagement signal)
-      await sleep(2_000)
-      try {
-        await gmail.sendMail({
-          from: WARMUP_TO,
-          to: WARMUP_TO,
-          subject: `Re: ${subject}`,
-          text: 'Got it, thanks for sending this over. Will take a look and get back to you.',
-        })
-      } catch {}
-
-      results.push({ i, ok: true, subject })
     } catch (e) {
       results.push({ i, ok: false, subject, err: e instanceof Error ? e.message : String(e) })
     }
 
-    // Short stagger between sends (3s — fits in 60s function limit even at 30 emails/day)
+    // Tiny stagger so Resend doesn't rate-limit
     if (i < emailsToSend - 1) {
-      await sleep(3_000)
+      await sleep(1_000)
     }
   }
 
