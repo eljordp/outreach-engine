@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json().catch(() => ({}))
-  const { industry, leadIds, limit = 30 } = body as { industry?: string; leadIds?: string[]; limit?: number }
+  const { industry, leadIds, limit = 15 } = body as { industry?: string; leadIds?: string[]; limit?: number }
 
   const params = new URLSearchParams()
   params.set('select', 'id,business_name,email,pitch_token,pitch_script,audit_findings,stage,notes')
@@ -71,6 +71,8 @@ export async function POST(req: NextRequest) {
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: { user: FROM_EMAIL, pass: GMAIL_APP_PASSWORD },
+    pool: true,
+    maxConnections: 3,
   })
 
   const results: { lead: string; ok: boolean; err?: string }[] = []
@@ -113,7 +115,7 @@ export async function POST(req: NextRequest) {
       results.push({ lead: lead.business_name, ok: false, err: e instanceof Error ? e.message : String(e) })
     }
 
-    await sleep(2_000)
+    await sleep(500)
   }
 
   return NextResponse.json({

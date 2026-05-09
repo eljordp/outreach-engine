@@ -17,7 +17,7 @@ export async function GET(req: NextRequest) {
       'Authorization': `Bearer ${process.env.CRON_SECRET}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ limit: 30 }),
+    body: JSON.stringify({ limit: 15 }),
   })
 
   const data = await res.json()
