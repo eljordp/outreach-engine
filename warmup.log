@@ -253,3 +253,125 @@ Error [ERR_MODULE_NOT_FOUND]: Cannot find package 'nodemailer' imported from /Us
 }
 
 Node.js v24.13.1
+Day 31 of warmup — sending 30 emails
+
+✓ Sent [1/30]: "Circling back"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [2/30]: "Just wanted to share this"
+  ↩ Replied from Gmail
+  ⏳ Waiting 1 min...
+
+✓ Sent [3/30]: "Making progress on this"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [4/30]: "Worth a look"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [5/30]: "One thing I wanted to mention"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [6/30]: "One thing I wanted to mention"
+  ↩ Replied from Gmail
+  ⏳ Waiting 1 min...
+
+✓ Sent [7/30]: "Loop you in"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [8/30]: "Loop you in"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [9/30]: "Just wanted to share this"
+  ↩ Replied from Gmail
+  ⏳ Waiting 3 min...
+
+✓ Sent [10/30]: "Any thoughts?"
+  ↩ Replied from Gmail
+  ⏳ Waiting 3 min...
+
+✓ Sent [11/30]: "Loop you in"
+  ↩ Replied from Gmail
+  ⏳ Waiting 3 min...
+
+✓ Sent [12/30]: "Checking in"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [13/30]: "Making progress on this"
+  ↩ Replied from Gmail
+  ⏳ Waiting 3 min...
+
+✓ Sent [14/30]: "Circling back"
+  ↩ Replied from Gmail
+  ⏳ Waiting 3 min...
+
+✓ Sent [15/30]: "Just wanted to share this"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [16/30]: "Re: our conversation"
+  ↩ Replied from Gmail
+  ⏳ Waiting 1 min...
+
+✓ Sent [17/30]: "Saw this and thought of you"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [18/30]: "Saw this and thought of you"
+  ↩ Replied from Gmail
+  ⏳ Waiting 1 min...
+
+✓ Sent [19/30]: "Circling back"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [20/30]: "Worth a look"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [21/30]: "Making progress on this"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [22/30]: "Circling back"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [23/30]: "One thing I wanted to mention"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [24/30]: "Any thoughts?"
+  ↩ Replied from Gmail
+  ⏳ Waiting 1 min...
+
+✓ Sent [25/30]: "Quick question"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [26/30]: "Any thoughts?"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [27/30]: "Quick note"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [28/30]: "Making progress on this"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [29/30]: "Following up on this"
+  ↩ Replied from Gmail
+  ⏳ Waiting 2 min...
+
+✓ Sent [30/30]: "Update from my end"
+  ↩ Replied from Gmail
+
+Warmup done: 30 sent. Run this again tomorrow.
